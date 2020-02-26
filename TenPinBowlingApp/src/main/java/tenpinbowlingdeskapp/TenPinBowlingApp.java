@@ -191,17 +191,17 @@ public class TenPinBowlingApp {
             String TAB4 = "    ";
             String TAB3 = "   ";
             String TAB2 = "  ";
-            System.out.print("Frame" + TAB2);
-            System.out.print("1" + TAB2);
-            System.out.print("2" + TAB2);
-            System.out.print("3" + TAB2);
-            System.out.print("4" + TAB2);
-            System.out.print("5" + TAB2);
-            System.out.print("6" + TAB2);
-            System.out.print("7" + TAB2);
-            System.out.print("8" + TAB2);
-            System.out.print("9" + TAB2);
-            System.out.println("10" + TAB2);
+            System.out.print("Frame" + TAB5);
+            System.out.print("1" + TAB5);
+            System.out.print("2" + TAB5);
+            System.out.print("3" + TAB5);
+            System.out.print("4" + TAB5);
+            System.out.print("5" + TAB5);
+            System.out.print("6" + TAB5);
+            System.out.print("7" + TAB5);
+            System.out.print("8" + TAB5);
+            System.out.print("9" + TAB5);
+            System.out.println("10" + TAB4);
 
             for (String jugador : this.mapaJugadoresPuntajes.keySet()) {
                 System.out.println(jugador + TAB2);
