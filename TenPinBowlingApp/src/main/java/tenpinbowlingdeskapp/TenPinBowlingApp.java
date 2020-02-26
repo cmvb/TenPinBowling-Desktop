@@ -187,29 +187,37 @@ public class TenPinBowlingApp {
             System.out.println("|           Tabla de puntuación Ten Pin-Bowling             |");
             System.out.println("-------------------------------------------------------------");
 
-            System.out.print("Frame" + "\t");
-            System.out.print("1" + "\t");
-            System.out.print("2" + "\t");
-            System.out.print("3" + "\t");
-            System.out.print("4" + "\t");
-            System.out.print("5" + "\t");
-            System.out.print("6" + "\t");
-            System.out.print("7" + "\t");
-            System.out.print("8" + "\t");
-            System.out.print("9" + "\t");
-            System.out.println("10" + "\t");
+            String TAB5 = "     ";
+            String TAB4 = "    ";
+            String TAB3 = "   ";
+            String TAB2 = "  ";
+            System.out.print("Frame" + TAB2);
+            System.out.print("1" + TAB2);
+            System.out.print("2" + TAB2);
+            System.out.print("3" + TAB2);
+            System.out.print("4" + TAB2);
+            System.out.print("5" + TAB2);
+            System.out.print("6" + TAB2);
+            System.out.print("7" + TAB2);
+            System.out.print("8" + TAB2);
+            System.out.print("9" + TAB2);
+            System.out.println("10" + TAB2);
 
             for (String jugador : this.mapaJugadoresPuntajes.keySet()) {
-                System.out.println(jugador + "\t");
-                System.out.print("Pinfalls" + "\t");
+                System.out.println(jugador + TAB2);
+                System.out.print("Pinfalls" + TAB2);
                 List<RondaDto> listaRondas = this.mapaJugadoresPuntajes.get(jugador);
                 for (RondaDto rondaDto : listaRondas) {
-                    rondaDto.getListaPuntajesTexto().forEach(puntajeTexto -> System.out.print(puntajeTexto + "\t"));
+                    rondaDto.getListaPuntajesTexto().forEach(puntajeTexto -> System.out.print(puntajeTexto + TAB2));
                 }
                 System.out.println("");
 
-                System.out.print("Score" + "\t");
-                listaRondas.forEach(rondaDto -> System.out.print(rondaDto.getPuntajeTotal() + "\t"));
+                System.out.print("Score" + TAB3 + TAB2);
+                for (RondaDto rondaDto : listaRondas) {
+                    String TAB = String.valueOf(rondaDto.getPuntajeTotal()).length() == 1 ? TAB5 : (String.valueOf(rondaDto.getPuntajeTotal()).length() == 2 ? TAB4 : (String.valueOf(rondaDto.getPuntajeTotal()).length() == 3 ? TAB3 : TAB2));
+                    System.out.print(rondaDto.getPuntajeTotal() + TAB);
+
+                }
                 System.out.println("");
             }
 
