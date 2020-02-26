@@ -1,0 +1,8 @@
+2JUG-Normal/FILE:OK  - Test 1 => PR=OK; JU=OK;
+1JUG-Perfect/FILE:OK - Test 2 => PR=OK; JU=OK;
+1JUG-Normal/FILE:OK  - Test 3 => PR=OK; JU=OK;
+1JUG-Blank/FILE:OK   - Test 4 => PR=OK; JU=OK;
+1JUG-All(F)/FILE:OK  - Test 5 => PR=OK; JU=OK;
+1JUG-All(F)/FILE:BAD - Test 6 => PR=OK; JU=OK:El archivo es validado por no cumplir estructura;
+1JUG-Normal/FILE:BAD - Test 7 => PR=OK; JU=OK:El archivo es validado por no cumplir estructura;
+1JUG-Normal/FILE:BAD - Test 8 => PR=OK; JU=OK:El archivo es validado por no cumplir estructura;
