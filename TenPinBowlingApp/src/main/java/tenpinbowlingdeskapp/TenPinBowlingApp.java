@@ -74,6 +74,7 @@ public class TenPinBowlingApp {
         this.partidaActual = new JuegoDto();
         this.partidasHistorial = new ArrayList<>();
         this.mapaJugadoresPuntajes = new HashMap<>();
+        this.partidaSB = new PartidaSB();
 
         try {
             File file = new File(rutaArchivo);
@@ -129,7 +130,6 @@ public class TenPinBowlingApp {
         try {
             List<String> registrosArchivo = Util.listaCargueArchivos(fileIS);
             if (registrosArchivo != null && !registrosArchivo.isEmpty()) {
-                this.partidaSB = new PartidaSB();
                 result = this.partidaSB.validarEstructuraArchivo(registrosArchivo);
             } else {
                 String message = "El archivo está vacío.";
@@ -154,7 +154,6 @@ public class TenPinBowlingApp {
 
         try {
             List<String> registrosArchivo = Util.listaCargueArchivos(fileIS);
-            this.partidaSB = new PartidaSB();
             this.mapaJugadoresPuntajes = this.partidaSB.validarContenidoArchivo(registrosArchivo);
 
             result = this.mapaJugadoresPuntajes != null && !this.mapaJugadoresPuntajes.isEmpty();
@@ -174,7 +173,6 @@ public class TenPinBowlingApp {
             this.getPartidaActual().setId(contadorPartidas);
             this.getPartidaActual().setRondasPorJugador(this.mapaJugadoresPuntajes);
 
-            this.partidaSB = new PartidaSB();
             JuegoDto partida = this.partidaSB.jugarPartida(this.getPartidaActual());
             String message = "El ganador es: " + partida.getGanador().getNombre() + " con " + partida.getPuntajeMaximo() + " puntos.";
             System.out.println(message);
