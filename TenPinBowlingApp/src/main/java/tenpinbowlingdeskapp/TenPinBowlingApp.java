@@ -110,25 +110,30 @@ public class TenPinBowlingApp {
      * @return
      */
     public boolean validaciones(InputStream fileIS) {
-        this.mapaJugadoresPuntajes = new HashMap<>();
-        boolean esEstructuraValida = this.validarEstructuraArchivo(fileIS);
-        boolean esContenidoValido = esEstructuraValida ? this.validarContenidoArchivo(fileIS) : false;
+        try {
+            List<String> registrosArchivo = Util.listaCargueArchivos(fileIS);
+            this.mapaJugadoresPuntajes = new HashMap<>();
+            boolean esEstructuraValida = this.validarEstructuraArchivo(registrosArchivo);
+            boolean esContenidoValido = esEstructuraValida ? this.validarContenidoArchivo(registrosArchivo) : false;
 
-        return esEstructuraValida && esContenidoValido;
+            return esEstructuraValida && esContenidoValido;
+        } catch (CoreException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     /**
      * Método que permite saber si la estructura del archivo de lectura es
      * correcta
      *
-     * @param fileIS
+     * @param registrosArchivo
      * @return
      */
-    public boolean validarEstructuraArchivo(InputStream fileIS) {
+    public boolean validarEstructuraArchivo(List<String> registrosArchivo) {
         boolean result = false;
 
         try {
-            List<String> registrosArchivo = Util.listaCargueArchivos(fileIS);
             if (registrosArchivo != null && !registrosArchivo.isEmpty()) {
                 result = this.partidaSB.validarEstructuraArchivo(registrosArchivo);
             } else {
@@ -146,14 +151,13 @@ public class TenPinBowlingApp {
      * Método que permite saber si el contenido del archivo de lectura es
      * correcto
      *
-     * @param fileIS
+     * @param registrosArchivo
      * @return
      */
-    public boolean validarContenidoArchivo(InputStream fileIS) {
+    public boolean validarContenidoArchivo(List<String> registrosArchivo) {
         boolean result = false;
 
         try {
-            List<String> registrosArchivo = Util.listaCargueArchivos(fileIS);
             this.mapaJugadoresPuntajes = this.partidaSB.validarContenidoArchivo(registrosArchivo);
 
             result = this.mapaJugadoresPuntajes != null && !this.mapaJugadoresPuntajes.isEmpty();
@@ -179,9 +183,42 @@ public class TenPinBowlingApp {
             this.mapaJugadoresPuntajes = new HashMap<>();
             this.mapaJugadoresPuntajes = partida.getRondasPorJugador();
 
+            System.out.println("-------------------------------------------------------------");
+            System.out.println("|           Tabla de puntuación Ten Pin-Bowling             |");
+            System.out.println("-------------------------------------------------------------");
+
+            System.out.print("Frame" + "\t");
+            System.out.print("1" + "\t");
+            System.out.print("2" + "\t");
+            System.out.print("3" + "\t");
+            System.out.print("4" + "\t");
+            System.out.print("5" + "\t");
+            System.out.print("6" + "\t");
+            System.out.print("7" + "\t");
+            System.out.print("8" + "\t");
+            System.out.print("9" + "\t");
+            System.out.println("10" + "\t");
+
+            for (String jugador : this.mapaJugadoresPuntajes.keySet()) {
+                System.out.println(jugador + "\t");
+                System.out.print("Pinfalls" + "\t");
+                List<RondaDto> listaRondas = this.mapaJugadoresPuntajes.get(jugador);
+                for (RondaDto rondaDto : listaRondas) {
+                    rondaDto.getListaPuntajesTexto().forEach(puntajeTexto -> System.out.print(puntajeTexto + "\t"));
+                }
+                System.out.println("");
+
+                System.out.print("Score" + "\t");
+                listaRondas.forEach(rondaDto -> System.out.print(rondaDto.getPuntajeTotal() + "\t"));
+                System.out.println("");
+            }
+
+            System.out.println("-------------------------------------------------------------");
+            System.out.println("|           Tabla de puntuación Ten Pin-Bowling             |");
+            System.out.println("-------------------------------------------------------------");
+
             this.getPartidasHistorial().add(partida);
             this.contadorPartidas++;
-
             // Mostrar en consola la tabla de resultados
         } catch (CoreException ex) {
             ex.printStackTrace();
